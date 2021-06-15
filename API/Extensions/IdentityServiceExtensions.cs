@@ -34,7 +34,7 @@ namespace API.Extensions
                             IssuerSigningKey = key,
                             ValidateIssuer = false,
                             ValidateAudience = false
-                        }
+                        };
                     });
                 services.AddScoped<TokenService>();
 
