@@ -1,15 +1,18 @@
 using Application.Activities;
 using Application.Core;
-using MediatR;
+using Application.Interfaces;
 using AutoMapper;
+using Infrastructure.Photos;
+using Infrastructure.Security;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Persistence;
-using Application.Interfaces;
-using Infrastructure.Security;
-using Infrastructure.Photos;
+
+
+
 
 namespace API.Extensions
 {
@@ -28,9 +31,11 @@ namespace API.Extensions
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddCors(opt => {
-                opt.AddPolicy("CorsPolicy", policy => {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+            services.AddCors(opt => 
+            {
+                opt.AddPolicy("CorsPolicy", policy => 
+                {
+                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins(new string[] {"http://localhost:3000", "test"});
                 });
             });
 
